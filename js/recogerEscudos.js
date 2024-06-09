@@ -5,10 +5,10 @@ class MainScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('fondo', '../img/fondo.png');
-        this.load.image('plataforma', '../img/platform1.png');
-        this.load.image('platBase', '../img/platform4.png');
-        this.load.spritesheet('dino', '../img/dino.png', { frameWidth: 50, frameHeight: 50 });
+        this.load.image('fondo', './js/img/fondo.png');
+        this.load.image('plataforma', './js/img/platform1.png');
+        this.load.image('platBase', './js/img/platform4.png');
+        this.load.spritesheet('dino', './js/img/dino.png', { frameWidth: 50, frameHeight: 50 });
     }
 
     create() {
