@@ -20,7 +20,7 @@ class MainScene extends Phaser.Scene {
         platBase.create(450, 760, 'platBase');
 
         // Player
-        this.player = this.physics.add.sprite(400, 400, 'dino').setScale(1.4);
+        this.player = this.physics.add.sprite(400, 401, 'dino').setScale(1.4);
         this.player.setCollideWorldBounds(true);
         this.player.setBounce(0.2);
         this.physics.add.collider(this.player, platBase);
