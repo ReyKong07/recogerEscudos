@@ -8,6 +8,8 @@ class MainScene extends Phaser.Scene {
         this.load.image('fondo', './js/img/fondo.png');
         this.load.image('plataforma', './js/img/platform1.png');
         this.load.image('platBase', './js/img/platform4.png');
+        this.load.image('flecha-left', './js/img/izquierda.png')
+        this.load.image('flecha-right', './js/img/derecha.png')
         this.load.spritesheet('dino', './js/img/dino.png', { frameWidth: 50, frameHeight: 50 });
     }
 
@@ -20,23 +22,21 @@ class MainScene extends Phaser.Scene {
         platBase.create(450, 760, 'platBase');
 
         // Player
-        this.player = this.physics.add.sprite(400, 401, 'dino').setScale(1.4);
+        this.player = this.physics.add.sprite(400, 400, 'dino').setScale(1.4);
         this.player.setCollideWorldBounds(true);
         this.player.setBounce(0.2);
         this.physics.add.collider(this.player, platBase);
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        // Botones de pantalla táctil
-        this.leftButton = document.getElementById('leftButton');
-        this.rightButton = document.getElementById('rightButton');
-        this.turnButton = document.getElementById('turnButton');
+        // Botones de pantalla táctil como sprites
+        this.leftButton = this.add.sprite(50, 770, 'flecha-left').setInteractive();
+        this.rightButton = this.add.sprite(150, 770, 'flecha-right').setInteractive();
 
-        // Asignar eventos a los botones
-        this.leftButton.addEventListener('pointerdown', () => this.moveLeft = true);
-        this.leftButton.addEventListener('pointerup', () => this.moveLeft = false);
-        this.rightButton.addEventListener('pointerdown', () => this.moveRight = true);
-        this.rightButton.addEventListener('pointerup', () => this.moveRight = false);
-        
+        // Asignar eventos a los sprites
+        this.leftButton.on('pointerdown', () => this.moveLeft = true);
+        this.leftButton.on('pointerup', () => this.moveLeft = false);
+        this.rightButton.on('pointerdown', () => this.moveRight = true);
+        this.rightButton.on('pointerup', () => this.moveRight = false);
 
         this.moveLeft = false;
         this.moveRight = false;
@@ -100,13 +100,6 @@ const config = {
         autoCenter: Phaser.Scale.CENTER_BOTH
     }
 };
-
 const game = new Phaser.Game(config);
 
-window.addEventListener('resize', () => {
-    const canvas = document.querySelector('canvas');
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-});
 
-window.dispatchEvent(new Event('resize'));
