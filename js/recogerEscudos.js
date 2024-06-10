@@ -23,6 +23,9 @@ class MainScene extends Phaser.Scene {
         this.load.image('roja1', './js/img/roja.png');
         this.load.image('roja2', './js/img/roja.png');
         this.load.image('roja3', './js/img/roja.png');
+        this.load.audio('musicFondo', './js/img/musicFondo.mp3');
+        this.load.audio('musicMoneda2', './js/img/musicMoneda2.mp3');
+        this.load.audio('musicGolpe', './js/img/musicGolpe.mp3');
     }
 
     create() {
@@ -34,6 +37,13 @@ class MainScene extends Phaser.Scene {
         platBase.create(450, 790, 'platBase');
         platBase.create(69, 760, 'platBase');
         platBase.create(450, 760, 'platBase');
+
+        this.sonidoGolpe = this.sound.add('musicGolpe', { volume: 1.5 });
+        this.sonidoMoneda = this.sound.add('musicMoneda2');
+        this.bgMusic = this.sound.add('musicFondo', { volume: 0.3, loop: true });
+
+        // Reproducir música de fondo
+        this.bgMusic.play();
 
         // Player
         this.player = this.physics.add.sprite(400, 600, 'dino').setScale(1.4);
@@ -165,6 +175,7 @@ class MainScene extends Phaser.Scene {
     }
 
     collectItem(player, item) {
+        this.sonidoMoneda.play();
         item.disableBody(true, true); // Eliminar el ítem de la pantalla
         puntos++;
         this.puntosText.setText('puntos: ' + puntos);
@@ -172,6 +183,7 @@ class MainScene extends Phaser.Scene {
 
     collectItemRoja(player, itemRoja) {
         if (itemRoja.texture.key === 'roja1' || itemRoja.texture.key === 'roja2' || itemRoja.texture.key === 'roja3') {
+            this.sonidoGolpe.play();
             this.scene.start('GameOver', { puntos: puntos });
         }
     }
