@@ -100,12 +100,12 @@ class MainScene extends Phaser.Scene {
 
     update() {
         if (this.cursors.left.isDown || this.moveLeft) {
-            this.player.setVelocityX(-160);
+            this.player.setVelocityX(-260);
             if (!this.player.anims.isPlaying || this.player.anims.currentAnim.key !== 'left') {
                 this.player.anims.play('left');
             }
         } else if (this.cursors.right.isDown || this.moveRight) {
-            this.player.setVelocityX(160);
+            this.player.setVelocityX(260);
             if (!this.player.anims.isPlaying || this.player.anims.currentAnim.key !== 'right') {
                 this.player.anims.play('right');
             }
